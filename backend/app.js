@@ -12,7 +12,7 @@ const {
   createUser, login,
 } = require('./controllers/users');
 const {
-  requestLogger, errorLogger
+  requestLogger, errorLogger,
 } = require('./middlewares/logger');
 const auth = require('./middlewares/auth');
 const { NotFoundError } = require('./errors/collectionOfErrors');
