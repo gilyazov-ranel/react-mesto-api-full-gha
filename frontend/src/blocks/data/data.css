@@ -1,0 +1,12 @@
+.data {
+    margin: 0 auto;
+    padding: 0 auto;
+    width: 358px;
+    height: 429px;
+}
+
+@media (max-width: 600px) {
+    .data {
+        width: 260px;
+    }
+}

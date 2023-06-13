@@ -1,0 +1,19 @@
+.data__input {
+    margin: 30px auto 0;
+    padding: 0;
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    border: 0;
+    border-bottom: 2px solid #CCCCCC;
+    background: #000000;
+    color: #FFFFFF;
+    outline: none;
+}
+
+@media (max-width: 600px) {
+    .data__input {
+        font-weight: 400;
+    }
+}

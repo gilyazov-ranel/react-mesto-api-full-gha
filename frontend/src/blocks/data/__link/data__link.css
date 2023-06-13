@@ -1,0 +1,8 @@
+.data__link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.data__link:hover {
+    opacity: 0.85;
+}

@@ -1,0 +1,9 @@
+.card__group {
+        margin: 20px 15px 31px 21px;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(min-content, max-content));
+        justify-content: space-between;
+        align-items: center;
+        width: 246px;
+}

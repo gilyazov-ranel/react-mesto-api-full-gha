@@ -1,0 +1,13 @@
+.card {
+    margin: 0;
+    padding: 0;
+    width: 282px;
+    position: relative;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -1,0 +1,28 @@
+.data__button {
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+    margin-top: 216px;
+    min-width: 100%;
+    min-height: 50px;
+    background: #FFFFFF;
+    border-radius: 2px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+    cursor: pointer;
+}
+
+.data__button:hover {
+    opacity: 0.85;
+}
+
+@media (max-width: 600px) {
+    .data__button {
+        min-height: 46px;
+        font-size: 16px;
+        line-height: 19px;
+    }
+}

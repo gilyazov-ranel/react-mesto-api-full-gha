@@ -1,0 +1,25 @@
+.profile__info-button {
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url(../../../image/edit_button.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    border: 0;
+    cursor: pointer;
+}
+
+.profile__info-button:hover {
+    opacity: 0.6;
+}
+
+@media (max-width: 700px) {
+    .profile__info-button {
+        object-fit: cover;
+        width: 18px;
+        height: 18px;
+    }
+}

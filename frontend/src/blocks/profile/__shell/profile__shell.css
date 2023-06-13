@@ -1,0 +1,49 @@
+.profile__shell {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    margin-right: 30px;
+}
+
+.profile__shell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("../../../image/editing_avatar.svg") no-repeat center center;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.4s ease;
+}
+
+.profile__shell::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .8);
+    opacity: 0;
+    transition: opacity 0.4s linear;
+}
+
+.profile__shell:hover::before,
+.profile__shell:hover::after {
+    opacity: 1;
+}
+
+@media (max-width: 950px) {
+    .profile__shell {
+        margin-right: calc(15vw - 100px);
+        margin-left: calc(15vw - 100px);
+    }
+}
+
+@media (max-width: 700px) {
+    .profile__shell {
+        margin-right: 0;
+    }
+}
