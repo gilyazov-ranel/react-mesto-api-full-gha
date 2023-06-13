@@ -18,11 +18,3 @@
 .data__button:hover {
     opacity: 0.85;
 }
-
-@media (max-width: 600px) {
-    .data__button {
-        min-height: 46px;
-        font-size: 16px;
-        line-height: 19px;
-    }
-}

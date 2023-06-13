@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const winston = require('winston');
 const expressWinston = require('express-winston');
 
@@ -7,7 +8,6 @@ module.exports.requestLogger = expressWinston.logger({
   ],
   format: winston.format.json(),
 });
-
 
 module.exports.errorLogger = expressWinston.errorLogger({
   transports: [

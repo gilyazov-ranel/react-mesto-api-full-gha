@@ -36,8 +36,7 @@ function App() {
     const [userEmael, setUserEmail] = useState('');
     const [popupTitle, setPopupTitle] = useState('');
     const [union, setUnion] = useState('')
-    const [windowWidth, setWindowWidth] = useState(window.screen.width);
-    console.log(windowWidth);
+
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
 
@@ -55,7 +54,6 @@ function App() {
             });
         }
 
-
     }, [token]);
 
     useEffect(() => {
@@ -63,14 +61,9 @@ function App() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-
     useEffect(() => {
-        window.addEventListener('resize', () => {
-            setWindowWidth(window.screen.width);
-        })
-
-        document.addEventListener('keydown', onKeydown);
-        return () => document.removeEventListener('keydown', onKeydown);
+        document.addEventListener('keydown', onKeydown)
+        return () => document.removeEventListener('keydown', onKeydown)
     });
 
     function onKeydown({ key }) {
@@ -252,8 +245,7 @@ function App() {
                     <Header
                         pageTitle='Выйти'
                         name={userEmael}
-                        onSignOut={handleSignOut}
-                        windowWidth={windowWidth} />
+                        onSignOut={handleSignOut} />
                     <Main onEditProfile={handleEditProfileClick}
                         onAddPlace={handleAddPlaceClick}
                         onEditAvatar={handleEditAvatarClick}
