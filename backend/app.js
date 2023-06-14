@@ -1,6 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 const express = require('express');
+const cors = require('cors');
 const { errors } = require('celebrate');
 
 const bodyParser = require('body-parser');
@@ -23,7 +25,8 @@ const db = 'mongodb://127.0.0.1:27017/mestodb';
 
 const { PORT = 3000 } = process.env;
 const app = express();
-
+app.use(cors());
+app.options('*', cors());
 mongoose.connect(db)
   .then((res) => console.log('База даннных подключена'))
   .catch(((error) => console.log(error)));

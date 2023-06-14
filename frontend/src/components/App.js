@@ -144,7 +144,7 @@ function App() {
 
     function handleSuccessPopop() {
         setFormResult(true);
-        navigate('/sign-in', { replace: true });
+        navigate('/signin', { replace: true });
         setPopupTitle('Вы успешно зарегистрировались!');
         setUnion(successUnion);
     };
@@ -185,12 +185,14 @@ function App() {
     };
 
     function handleRegister(form) {
-        Auth.register(form).then((form) => {
-            if (form) {
+        Auth.register(form).then((data) => {
+            console.log(data);
+            if (data) {
                 handleSuccessPopop();
             }
         })
             .catch((err) => {
+                console.log('123456');
                 console.log(err);
                 handleErrorPopup();
             })
@@ -226,15 +228,15 @@ function App() {
 
     function handleSignOut() {
         localStorage.removeItem('token');
-        navigate('/sign-in');
+        navigate('/signin');
     }
 
     function handleTransitionRegister() {
-        navigate('/sign-in');
+        navigate('/signin');
     }
 
     function handleTransitionLogin() {
-        navigate('/sign-up');
+        navigate('/signup');
     }
 
     return (
@@ -258,9 +260,9 @@ function App() {
                 </ProtectedRoute>
                 } />
 
-                <Route path="*" element={loggedIn ? <Navigate to='/' replace /> : <Navigate to='/sign-in' replace />} />
-                <Route path='/sign-up' element={<Register onRegister={handleRegister} onSignOut={handleTransitionRegister} />} />
-                <Route path='/sign-in' element={<Login onLogin={handleLoginUser} onSignOut={handleTransitionLogin} />} />
+                <Route path="*" element={loggedIn ? <Navigate to='/' replace /> : <Navigate to='/signin' replace />} />
+                <Route path='/signup' element={<Register onRegister={handleRegister} onSignOut={handleTransitionRegister} />} />
+                <Route path='/signin' element={<Login onLogin={handleLoginUser} onSignOut={handleTransitionLogin} />} />
 
             </Routes>
             <EditProfilePopup isOpen={isEditProfilePopupOpen}

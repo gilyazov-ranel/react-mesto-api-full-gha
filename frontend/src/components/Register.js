@@ -55,7 +55,7 @@ export default function Register({ onRegister, onSignOut }) {
                 </form>
 
                 <p className='data__text'>Уже зарегистрированы?
-                    <Link to='/sign-in' className='data__link'> Войти</Link>
+                    <Link to='/signin' className='data__link'> Войти</Link>
                 </p>
             </div>
 
