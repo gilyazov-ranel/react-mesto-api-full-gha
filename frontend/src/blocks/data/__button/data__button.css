@@ -18,3 +18,17 @@
 .data__button:hover {
     opacity: 0.85;
 }
+
+@media (max-height: 650px) {
+    .data__button {
+        margin-top: calc(100vh - 80vh);
+    }
+}
+
+@media (max-width: 350px) {
+    .data__button {
+        font-size: 12px;
+        margin-top: calc(100vh - 90vh);
+    }
+}
+

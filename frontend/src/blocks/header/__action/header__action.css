@@ -11,3 +11,10 @@
 .header__action:hover {
     opacity: 0.6;
 }
+
+@media (max-width: 950px) {
+    .header__action {
+        margin-right: 27px;
+    }
+}
+

@@ -1,6 +1,12 @@
 .data {
     margin: 0 auto;
     padding: 0 auto;
-    width: 358px;
-    height: 429px;
+    max-width: 358px;
+    max-height: 429px;
+}
+
+@media (max-width: 950px) {
+    .data {
+        width: calc(100vw - 20vw);
+    }
 }

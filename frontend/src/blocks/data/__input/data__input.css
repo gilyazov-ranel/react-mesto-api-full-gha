@@ -11,3 +11,10 @@
     color: #FFFFFF;
     outline: none;
 }
+
+@media (max-width: 350px) {
+    .data__input {
+        font-size: 12px;
+    }
+}
+

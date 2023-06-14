@@ -3,3 +3,10 @@
     text-align: center;
     color: #FFFFFF;
 }
+
+@media (max-width: 350px) {
+    .data__text {
+        font-size: 12px;
+    }
+}
+

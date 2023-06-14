@@ -1,10 +1,10 @@
 class Api {
-    constructor(basePath, token) {
+    constructor(basePath) {
         this._basePath = basePath;
-        this._token = token;
-        this._headers = {
-            authorization: this._token
-        }
+        // this._token = token;
+        // this._headers = {
+        //     authorization: this._token
+        // }
     }
 
     _getJson(res) {
@@ -17,7 +17,7 @@ class Api {
     _getHeaders() {
         return {
             "Content-Type": "application/json",
-            authorization: this._token,
+            // authorization: this._token,
         };
     }
 
@@ -79,7 +79,7 @@ class Api {
     }
 }
 
-const api = new Api('https://mesto.nomoreparties.co/v1/cohort-61', '34621976-6065-469d-b8be-70c78381e0b0')
+const api = new Api('http://api.project.mesto.nomoredomains.rocks/')
 
 export { api };
 
