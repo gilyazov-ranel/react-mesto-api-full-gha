@@ -22,7 +22,7 @@
 @media (max-width: 600px) {
     .popup__close_form {
         top: -36px;
-        left: 262px;
+        left: 95%;
         width: 20px;
         height: 20px;
     }

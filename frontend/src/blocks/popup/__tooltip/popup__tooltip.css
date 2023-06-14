@@ -10,3 +10,9 @@
     padding: 0;
     text-align: center;
 }
+
+@media (max-width: 600px) {
+    .popup__tooltip {
+        margin: 25px 22px 45px 22px;
+    }
+}

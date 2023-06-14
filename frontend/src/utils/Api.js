@@ -79,7 +79,7 @@ class Api {
     }
 }
 
-const api = new Api('http://api.project.mesto.nomoredomains.rocks/')
+const api = new Api('https://api.project.mesto.nomoredomains.rocks/')
 
 export { api };
 
