@@ -35,7 +35,7 @@ function App() {
     const [card, setCard] = useState({});
     const [userEmael, setUserEmail] = useState('');
     const [popupTitle, setPopupTitle] = useState('');
-    const [union, setUnion] = useState('')
+    const [union, setUnion] = useState('');
 
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
@@ -43,7 +43,7 @@ function App() {
     useEffect(() => {
         if (token) {
             api.getCurrentUser().then(items => {
-                setCurrentUser(items)
+                setCurrentUser(items);
             }).catch((err) => {
                 console.log(err);
             });
@@ -77,6 +77,7 @@ function App() {
 
     function handleCardClick(card) {
         setSelectedCard(card);
+        console.log(card);
     };
 
     function handleSelectedCard(card) {
@@ -114,7 +115,7 @@ function App() {
 
     function handleCardLike(card) {
 
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
+        const isLiked = card.likes.some(i => i._id === currentUser.user._id);
 
         api.changeLikeCardStatus(card._id, !isLiked)
             .then((newCard) => {
@@ -128,7 +129,8 @@ function App() {
     function handleCardDelete(card) {
         api.deleteCard(card._id)
             .then(() => {
-                setCards(cards.filter(item => card._id !== item._id));
+                console.log(card._id)
+                setCards(cards.filter(item => card._id !== item));
                 setDeleteCardPopup(false);
             })
             .catch((err) => {
@@ -151,6 +153,7 @@ function App() {
 
 
     function handleUpdateUser(items) {
+        console.log(items);
         api.editProfiles(items)
             .then(item => {
                 setCurrentUser(item);
@@ -173,6 +176,7 @@ function App() {
     };
 
     function handleAddPlaceSubmit(card) {
+        console.log(card)
         api.createCard(card)
             .then(newCard => {
                 setCards([newCard, ...cards]);
@@ -186,7 +190,6 @@ function App() {
 
     function handleRegister(form) {
         Auth.register(form).then((data) => {
-            console.log(data);
             if (data) {
                 handleSuccessPopop();
             }
@@ -217,7 +220,7 @@ function App() {
         if (token) {
             Auth.checkToken(token).then((res) => {
                 if (res) {
-                    setUserEmail(res.data.email);
+                    setUserEmail(res.user.email);
                     handleLogin();
                     navigate('/', { replace: true });
                 }
@@ -253,7 +256,7 @@ function App() {
                         onEditAvatar={handleEditAvatarClick}
                         onSelectedCard={handleCardClick}
                         onOpenDeleteCard={handleDeleteCardClick}
-                        cards={cards}
+                        cards={cards.cards}
                         onCardLike={handleCardLike}
                         onSelectedCardToDelete={handleSelectedCard} />
                     <Footer />

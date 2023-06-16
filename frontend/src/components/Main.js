@@ -6,7 +6,6 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 function Main({ onEditAvatar, onEditProfile, onAddPlace, onSelectedCard, cards, onCardLike, onCardDelete, onOpenDeleteCard, onSelectedCardToDelete }) {
 
     const currenUser = useContext(CurrentUserContext);
-
     return (
 
         <main className="main">
@@ -16,13 +15,13 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onSelectedCard, cards, 
                     onClick={onEditAvatar}>
 
                     <img className="profile__avatar"
-                        src={currenUser.avatar}
+                        src={currenUser.user.avatar}
                         alt="Твоя аватарка" />
                 </div>
 
                 <div className="profile__info">
                     <h1 className="profile__title">
-                        {currenUser.name}
+                        {currenUser.user.name}
                     </h1>
 
                     <button className="profile__info-button"
@@ -31,7 +30,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onSelectedCard, cards, 
                         onClick={onEditProfile} />
 
                     <p className="profile__subtitle">
-                        {currenUser.about}
+                        {currenUser.user.about}
                     </p>
                 </div>
 

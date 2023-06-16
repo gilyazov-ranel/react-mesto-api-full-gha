@@ -1,10 +1,10 @@
 class Api {
     constructor(basePath) {
         this._basePath = basePath;
-        // this._token = token;
-        // this._headers = {
-        //     authorization: this._token
-        // }
+        this._token = localStorage.getItem('token');;
+        this._headers = {
+            "Authorization": `Bearer ${this._token}`
+        }
     }
 
     _getJson(res) {
@@ -17,7 +17,7 @@ class Api {
     _getHeaders() {
         return {
             "Content-Type": "application/json",
-            // authorization: this._token,
+            "Authorization": `Bearer ${this._token}`
         };
     }
 
@@ -79,7 +79,7 @@ class Api {
     }
 }
 
-const api = new Api('https://api.project.mesto.nomoredomains.rocks/')
+const api = new Api('https://api.project.mesto.nomoredomains.rocks')
 
 export { api };
 

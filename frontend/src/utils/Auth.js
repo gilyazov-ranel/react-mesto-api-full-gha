@@ -32,7 +32,7 @@ export function authorize(form) {
         .then((data) => {
             if (data.token) {
                 localStorage.setItem('token', data.token);
-                return data;
+                return data.token;
             }
         })
 };
