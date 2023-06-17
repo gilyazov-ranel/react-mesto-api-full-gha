@@ -26,7 +26,6 @@ const db = 'mongodb://127.0.0.1:27017/mestodb';
 const { PORT = 3000 } = process.env;
 const app = express();
 app.use(cors());
-app.options('*', cors());
 
 mongoose.connect(db)
   .then((res) => console.log('База даннных подключена'))

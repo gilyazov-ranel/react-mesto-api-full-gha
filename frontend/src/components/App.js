@@ -39,7 +39,6 @@ function App() {
     const [union, setUnion] = useState('');
 
     const navigate = useNavigate();
-    const token = localStorage.getItem('token');
 
     useEffect(() => {
         handleTokenCheck();
@@ -109,6 +108,7 @@ function App() {
     };
 
     function handleTokenCheck() {
+        const token = localStorage.getItem('token');
         if (token) {
             Auth.checkToken(token).then((res) => {
                 if (res) {
@@ -188,6 +188,7 @@ function App() {
     function handleUpdateUser(items) {
         api.editProfiles(items)
             .then(item => {
+                console.log(item)
                 setCurrentUser(item.user);
                 setEditProfilePopupOpen(false);
             })
@@ -199,6 +200,7 @@ function App() {
     function handleUpdateAvatar(items) {
         api.instalAvatar(items)
             .then(item => {
+                console.log(item);
                 setCurrentUser(item);
                 setEditAvatarPopupOpen(false);
             })
