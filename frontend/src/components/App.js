@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import '../index.css';
 import { useEffect, useState } from 'react';
@@ -41,25 +42,24 @@ function App() {
     const token = localStorage.getItem('token');
 
     useEffect(() => {
-        if (token) {
+        handleTokenCheck();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
+        if (loggedIn) {
             api.getCurrentUser().then(items => {
-                setCurrentUser(items);
+                setCurrentUser(items.user);
             }).catch((err) => {
                 console.log(err);
             });
-            api.getCard().then(card => {
-                setCards(card);
+            api.getCard().then(cards => {
+                setCards(cards.cards);
             }).catch((err) => {
                 console.log(err);
             });
         }
-
-    }, [token]);
-
-    useEffect(() => {
-        handleTokenCheck();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [loggedIn]);
 
     useEffect(() => {
         document.addEventListener('keydown', onKeydown)
@@ -77,7 +77,6 @@ function App() {
 
     function handleCardClick(card) {
         setSelectedCard(card);
-        console.log(card);
     };
 
     function handleSelectedCard(card) {
@@ -109,18 +108,53 @@ function App() {
         setDeleteCardPopup(true)
     };
 
-    function handleLogin() {
-        setLoggedIn(true)
+    function handleTokenCheck() {
+        if (token) {
+            Auth.checkToken(token).then((res) => {
+                if (res) {
+                    setUserEmail(res.email);
+                    setLoggedIn(true)
+                    navigate('/', { replace: true });
+                }
+            })
+                .catch(err => console.log(err));
+        }
+    }
+
+    function handleRegister(form) {
+        Auth.register(form).then((data) => {
+            if (data) {
+                handleSuccessPopop();
+            }
+        })
+            .catch((err) => {
+                console.log(err);
+                handleErrorPopup();
+            })
+    };
+
+    function handleLoginUser(form) {
+        Auth.authorize(form)
+            .then((data) => {
+                if (data) {
+                    setUserEmail(form.email);
+                    setLoggedIn(true)
+                    navigate('/', { replace: true });
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                handleErrorPopup();
+            })
     };
 
     function handleCardLike(card) {
 
-        const isLiked = card.likes.some(i => i._id === currentUser.user._id);
+        const isLiked = card.likes.some(i => i === currentUser._id);
 
         api.changeLikeCardStatus(card._id, !isLiked)
-            .then((newCard) => {
-                setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-            })
+            .then((newCard) => setCards((cards) => cards.map((c) => c._id === card._id ? newCard.data : c))
+            )
             .catch((err) => {
                 console.log(err);
             })
@@ -129,8 +163,7 @@ function App() {
     function handleCardDelete(card) {
         api.deleteCard(card._id)
             .then(() => {
-                console.log(card._id)
-                setCards(cards.filter(item => card._id !== item));
+                setCards(cards.filter(item => item._id !== card._id));
                 setDeleteCardPopup(false);
             })
             .catch((err) => {
@@ -153,10 +186,9 @@ function App() {
 
 
     function handleUpdateUser(items) {
-        console.log(items);
         api.editProfiles(items)
             .then(item => {
-                setCurrentUser(item);
+                setCurrentUser(item.user);
                 setEditProfilePopupOpen(false);
             })
             .catch((err) => {
@@ -176,58 +208,16 @@ function App() {
     };
 
     function handleAddPlaceSubmit(card) {
-        console.log(card)
         api.createCard(card)
             .then(newCard => {
                 setCards([newCard, ...cards]);
                 setAddPlacePopupOpen(false);
-
             })
             .catch((err) => {
                 console.log(err);
             })
     };
 
-    function handleRegister(form) {
-        Auth.register(form).then((data) => {
-            if (data) {
-                handleSuccessPopop();
-            }
-        })
-            .catch((err) => {
-                console.log('123456');
-                console.log(err);
-                handleErrorPopup();
-            })
-    };
-
-    function handleLoginUser(form) {
-        Auth.authorize(form)
-            .then((data) => {
-                if (data) {
-                    setUserEmail(form.email);
-                    handleLogin();
-                    navigate('/', { replace: true });
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                handleErrorPopup();
-            })
-    };
-
-    function handleTokenCheck() {
-        if (token) {
-            Auth.checkToken(token).then((res) => {
-                if (res) {
-                    setUserEmail(res.user.email);
-                    handleLogin();
-                    navigate('/', { replace: true });
-                }
-            })
-                .catch(err => console.log(err));
-        }
-    }
 
     function handleSignOut() {
         localStorage.removeItem('token');
@@ -256,7 +246,7 @@ function App() {
                         onEditAvatar={handleEditAvatarClick}
                         onSelectedCard={handleCardClick}
                         onOpenDeleteCard={handleDeleteCardClick}
-                        cards={cards.cards}
+                        cards={cards}
                         onCardLike={handleCardLike}
                         onSelectedCardToDelete={handleSelectedCard} />
                     <Footer />

@@ -47,5 +47,5 @@ export function checkToken(token) {
         }
     })
     .then(getResponse)
-        .then(data => data)
+        .then(data => data.user)
 };

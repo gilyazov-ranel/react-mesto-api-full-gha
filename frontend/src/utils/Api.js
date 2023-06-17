@@ -31,7 +31,7 @@ class Api {
         return fetch(`${this._basePath}/users/me`, {
             method: 'PATCH',
             headers: this._getHeaders(),
-            body: JSON.stringify(item)
+            body: JSON.stringify(item),
         }).then(this._getJson);
     }
 
