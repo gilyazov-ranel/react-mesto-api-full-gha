@@ -10,7 +10,7 @@ const {
 } = require('../errors/collectionOfErrors');
 const { errorCenter } = require('../middlewares/errorCenter');
 
-const { JWT_SECRET } = process.env.JWT_SECRET;
+const jwtSecret = process.env.JWT_SECRET;
 const created = 201;
 
 module.exports.getUsers = (req, res, next) => {
@@ -45,7 +45,7 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, jwtSecret, { expiresIn: '7d' });
       res.send({ token });
     })
     .catch(next);
