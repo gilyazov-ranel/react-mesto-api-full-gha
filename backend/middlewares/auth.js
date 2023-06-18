@@ -1,10 +1,11 @@
 /* eslint-disable import/newline-after-import */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable consistent-return */
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { Unauthorized } = require('../errors/collectionOfErrors');
-require('dotenv').config();
-const { JWT_SECRET } = process.env;
+
+const { JWT_SECRET } = process.env.JWT_SECRET;
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;

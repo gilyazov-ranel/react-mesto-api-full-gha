@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unused-vars */
-
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
@@ -9,9 +9,8 @@ const {
   NotFoundError, Conflict,
 } = require('../errors/collectionOfErrors');
 const { errorCenter } = require('../middlewares/errorCenter');
-require('dotenv').config();
 
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET } = process.env.JWT_SECRET;
 const created = 201;
 
 module.exports.getUsers = (req, res, next) => {
