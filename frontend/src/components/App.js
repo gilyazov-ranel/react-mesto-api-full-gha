@@ -37,13 +37,8 @@ function App() {
     const [userEmael, setUserEmail] = useState('');
     const [popupTitle, setPopupTitle] = useState('');
     const [union, setUnion] = useState('');
-
     const navigate = useNavigate();
-
-    useEffect(() => {
-        handleTokenCheck();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         if (loggedIn) {
@@ -53,12 +48,17 @@ function App() {
                 console.log(err);
             });
             api.getCard().then(cards => {
-                setCards(cards.cards);
+                setCards(cards.cards.reverse());
             }).catch((err) => {
                 console.log(err);
             });
         }
     }, [loggedIn]);
+
+    useEffect(() => {
+        handleTokenCheck();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         document.addEventListener('keydown', onKeydown)
@@ -108,7 +108,6 @@ function App() {
     };
 
     function handleTokenCheck() {
-        const token = localStorage.getItem('token');
         if (token) {
             Auth.checkToken(token).then((res) => {
                 if (res) {
@@ -138,8 +137,8 @@ function App() {
             .then((data) => {
                 if (data) {
                     setUserEmail(form.email);
-                    setLoggedIn(true)
                     navigate('/', { replace: true });
+                    setLoggedIn(true);
                 }
             })
             .catch((err) => {
@@ -188,7 +187,6 @@ function App() {
     function handleUpdateUser(items) {
         api.editProfiles(items)
             .then(item => {
-                console.log(item)
                 setCurrentUser(item.user);
                 setEditProfilePopupOpen(false);
             })
@@ -200,8 +198,7 @@ function App() {
     function handleUpdateAvatar(items) {
         api.instalAvatar(items)
             .then(item => {
-                console.log(item);
-                setCurrentUser(item);
+                setCurrentUser(item.data);
                 setEditAvatarPopupOpen(false);
             })
             .catch((err) => {
@@ -223,6 +220,7 @@ function App() {
 
     function handleSignOut() {
         localStorage.removeItem('token');
+        setLoggedIn(false);
         navigate('/signin');
     }
 

@@ -1,10 +1,6 @@
 class Api {
     constructor(basePath) {
         this._basePath = basePath;
-        this._token = localStorage.getItem('token');;
-        this._headers = {
-            "Authorization": `Bearer ${this._token}`
-        }
     }
 
     _getJson(res) {
@@ -15,15 +11,16 @@ class Api {
     }
 
     _getHeaders() {
+        const token = localStorage.getItem('token');;
         return {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${this._token}`
+            "Authorization": `Bearer ${token}`
         };
     }
 
     getCard() {
         return fetch(`${this._basePath}/cards`, {
-            headers: this._headers
+            headers: this._getHeaders(),
         }).then(this._getJson);
     };
 

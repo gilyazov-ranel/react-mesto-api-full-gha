@@ -4,7 +4,7 @@
 const express = require('express');
 const cors = require('cors');
 const { errors } = require('celebrate');
-
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { validateCreateUser, validateLoginUser } = require('./utilit/validateUser');
@@ -37,6 +37,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(requestLogger);
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.post('/signup', validateCreateUser, createUser);
 app.post('/signin', validateLoginUser, login);
 
