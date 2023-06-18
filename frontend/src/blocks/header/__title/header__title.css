@@ -13,3 +13,8 @@
     }
 }
 
+@media (max-width: 550px) {
+    .header__title {
+        margin-left: calc(100vw - 94vw);
+    }
+}
