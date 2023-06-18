@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unused-vars */
 
 const bcrypt = require('bcryptjs');
@@ -8,6 +9,7 @@ const {
   NotFoundError, Conflict,
 } = require('../errors/collectionOfErrors');
 const { errorCenter } = require('../middlewares/errorCenter');
+require('dotenv').config();
 
 const { JWT_SECRET } = process.env;
 const created = 201;

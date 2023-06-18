@@ -4,7 +4,6 @@
 const express = require('express');
 const cors = require('cors');
 const { errors } = require('celebrate');
-require('dotenv').config();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { validateCreateUser, validateLoginUser } = require('./utilit/validateUser');
