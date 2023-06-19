@@ -1,11 +1,11 @@
 /* eslint-disable import/newline-after-import */
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable consistent-return */
-require('dotenv').config();
+
 const jwt = require('jsonwebtoken');
 const { Unauthorized } = require('../errors/collectionOfErrors');
 
 const jwtSecret = process.env.JWT_SECRET;
+const nodeEnv = process.env.NODE_ENV;
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, jwtSecret);
+    payload = jwt.verify(token, nodeEnv === 'production' ? jwtSecret : 'dev-secret');
   } catch (err) {
     return next(new Unauthorized('Необходима авторизация!'));
   }

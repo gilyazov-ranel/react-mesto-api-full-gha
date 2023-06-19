@@ -1,8 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 const { errors } = require('celebrate');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -26,6 +28,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 app.use(cors());
 app.options('*', cors());
+app.use(helmet());
 
 mongoose.connect(db)
   .then((res) => console.log('База даннных подключена'))

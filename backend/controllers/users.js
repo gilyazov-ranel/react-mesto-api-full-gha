@@ -1,6 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unused-vars */
-require('dotenv').config();
 const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
@@ -11,6 +9,7 @@ const {
 const { errorCenter } = require('../middlewares/errorCenter');
 
 const jwtSecret = process.env.JWT_SECRET;
+const nodeEnv = process.env.NODE_ENV;
 const created = 201;
 
 module.exports.getUsers = (req, res, next) => {
@@ -45,7 +44,7 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, jwtSecret, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, nodeEnv === 'production' ? jwtSecret : 'dev-secret', { expiresIn: '7d' });
       res.send({ token });
     })
     .catch(next);
