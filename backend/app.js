@@ -4,7 +4,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-
+const helmet = require('helmet');
 const { errors } = require('celebrate');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -23,8 +23,11 @@ const { NotFoundError } = require('./errors/collectionOfErrors');
 const notFound = '404';
 
 const db = 'mongodb://127.0.0.1:27017/mestodb';
+
 const { PORT = 3000 } = process.env;
 const app = express();
+app.use(helmet());
+
 app.use(cors());
 app.options('*', cors());
 
